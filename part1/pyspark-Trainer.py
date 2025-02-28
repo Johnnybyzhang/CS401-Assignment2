@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import collect_list
 from pyspark.ml.fpm import FPGrowth
+from pyspark.sql.functions import collect_set
 
 # Step 1: Initialize Spark in local mode
 spark = SparkSession.builder \
@@ -17,7 +18,7 @@ tracks = tracks1.union(tracks2)
 songs = spark.read.csv("../2023_spotify_songs.csv", header=True, inferSchema=True)
 
 # Step 3: Prepare baskets by grouping tracks by 'pid'
-baskets = tracks.groupBy("pid").agg(collect_list("track_name").alias("tracks"))
+baskets = tracks.groupBy("pid").agg(collect_set("track_name").alias("tracks"))
 baskets.show(5, truncate=False)
 
 # Step 4: Mine frequent itemsets and association rules with FP-Growth
