@@ -8,4 +8,5 @@ dependencies = [
     "fpgrowth-py>=1.0.0",
     "mlxtend>=0.23.4",
     "pandas>=2.2.3",
+    "pyspark>=3.5.5",
 ]
