@@ -4,9 +4,13 @@ from pyspark.ml.fpm import FPGrowth
 from pyspark.sql.functions import collect_set
 
 # Step 1: Initialize Spark in local mode
+
 spark = SparkSession.builder \
     .appName("Spotify Association Rules") \
     .master("local[*]") \
+    .config("spark.driver.memory", "192g") \
+    .config("spark.executor.memory", "192g") \
+    .config("spark.driver.maxResultSize", "0") \
     .getOrCreate()
 
 # Step 2: Load datasets
