@@ -6,6 +6,9 @@ import pickle
 spark = SparkSession.builder \
     .appName("Load and Export FP-Growth Model") \
     .master("local[*]") \
+    .config("spark.driver.memory", "192g") \
+    .config("spark.executor.memory", "192g") \
+    .config("spark.driver.maxResultSize", "0") \
     .getOrCreate()
 
 # Load the pre-computed FP-Growth model from disk
