@@ -17,8 +17,10 @@ model = FPGrowthModel.load("fp_growth_model")
 # Extract the association rules DataFrame from the model
 rules_df = model.associationRules
 
-# Convert the DataFrame rows to a list of dictionaries
-rules_list = [row.asDict() for row in rules_df.collect()]
+# Convert the DataFrame rows to a list of dictionaries using toLocalIterator
+rules_list = []
+for row in rules_df.toLocalIterator():
+    rules_list.append(row.asDict())
 
 # Save the rules list as a pickle file for faster loading later
 with open("association_rules.pkl", "wb") as f:
